@@ -53,7 +53,6 @@ This will start the application on http://localhost:4200. Open the URL in your b
 ## Known Limitations or Areas for Improvement
 
 - API Error Handling: Further validation of API responses could be added to handle network or server issues more gracefully.
-- Version Compatibility: The project uses Angular v19, which may not be compatible with certain third-party libraries that haven’t been updated for this version.
 - Customization: TailwindCSS is used for styling, but custom themes or extended configurations may be necessary for more complex designs.
 
 ## API Endpoints
