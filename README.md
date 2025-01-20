@@ -42,9 +42,8 @@ This will start the application on http://localhost:4200. Open the URL in your b
 ## Third-Party Libraries
 
 - **Angular**: The core framework used to build the application.
-  Version: 14 or higher
+  Version: 19 or higher
 - **tailwindcss**: A utility-first CSS framework for styling. Used for layout styling, form controls, and UI components.
-- **zod**: A TypeScript-first schema validation library.
 - **RxJS**: A library for reactive programming used for handling asynchronous data streams.
 - **HTML2Canvas**: Used for saving the registration form as an image (to save the generated code).
 - **TypeScript**: The language used for development, ensuring type safety and better maintainability.
