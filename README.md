@@ -8,7 +8,6 @@ This project implements the Exhibitor Registration Form for an event, where exhi
 - [Third-Party Libraries](#third-party-libraries)
 - [Known Limitations or Areas for Improvement](#known-limitations-or-areas-for-improvement)
 - [API Endpoints](#api-endpoints)
-- [Resources](#resources)
 
 ## Setup Instructions
 
