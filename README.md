@@ -15,7 +15,7 @@ This project implements the Exhibitor Registration Form for an event, where exhi
 1. **Clone the repository:**
 
 ```bash
-   git clone git@github.com:hairus0223/challenge-ex.git
+git clone git@github.com:hairus0223/challenge-ex.git
 ```
 
 2. **Navigate to the project folder:**
