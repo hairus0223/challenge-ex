@@ -1,60 +1,81 @@
-# ChallengeEx
+# Exhibitor Registration Form
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+This project implements the Exhibitor Registration Form for an event, where exhibitors can register their colleagues onsite by scanning a QR code and filling out registration details. The form is mobile responsive and interacts with APIs to submit exhibitor data.
 
-## Development server
+## Table of Contents
 
-To start a local development server, run:
+- [Setup Instructions](#setup-instructions)
+- [Third-Party Libraries](#third-party-libraries)
+- [Known Limitations or Areas for Improvement](#known-limitations-or-areas-for-improvement)
+- [API Endpoints](#api-endpoints)
+- [Resources](#resources)
+
+## Setup Instructions
+
+1. **Clone the repository:**
+
+```bash
+   git clone git@github.com:hairus0223/challenge-ex.git
+```
+
+2. **Navigate to the project folder:**
+
+```bash
+cd challenge-ex
+```
+
+3. **Install dependencies: Ensure you have Angular CLI installed and then run::**
+
+```bash
+yarn install
+# or
+npm install
+```
+
+4. **Run the application: Start the Angular development server:**
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+This will start the application on http://localhost:4200. Open the URL in your browser.
 
-## Code scaffolding
+## Third-Party Libraries
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Angular**: The core framework used to build the application.
+  Version: 14 or higher
+- **tailwindcss**: A utility-first CSS framework for styling. Used for layout styling, form controls, and UI components.
+- **zod**: A TypeScript-first schema validation library.
+- **RxJS**: A library for reactive programming used for handling asynchronous data streams.
+- **HTML2Canvas**: Used for saving the registration form as an image (to save the generated code).
+- **TypeScript**: The language used for development, ensuring type safety and better maintainability.
 
-```bash
-ng generate component component-name
-```
+## Known Limitations or Areas for Improvement
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- API Error Handling: Further validation of API responses could be added to handle network or server issues more gracefully.
+- Version Compatibility: The project uses Angular v19, which may not be compatible with certain third-party libraries that haven’t been updated for this version.
+- Customization: TailwindCSS is used for styling, but custom themes or extended configurations may be necessary for more complex designs.
 
-```bash
-ng generate --help
-```
+## API Endpoints
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- /exhibitor-company-list: Used to fetch the list of event companies.
+- /add-exhibitor: Used to submit exhibitor registration data. The payload structure is as follows:
 
 ```bash
-ng test
+{
+  "S_added_via": "Web Form",
+  "S_company": "Company",
+  "S_email_address": "Email_Address",
+  "S_group_reg_id": "Random_Five_Letter_Code",
+  "S_name_on_badge": "Name_on_Badge",
+  "S_job_title": "Job_Title",
+  "S_country": "Country",
+  "S_company_on_badge": "Company_on_Badge",
+  "SB_event_fha": true,  // If FHA-Food & Beverage is selected
+  "SB_event_prowine": true // If Prowine Singapore is selected
+}
 ```
 
-## Running end-to-end tests
+- /provinces.json: Provides the list of countries for selection.
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# challenge-ex
+**Note:** The API endpoints are CORS-protected and only accept requests from localhost:4200.
