@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of } from 'rxjs';
 import {
-  Company,
   Exhibitor,
   AddExhibitorResponse,
+  CompanyResponse,
 } from '../models/exhibitor.model';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class ExhibitorService {
 
   constructor(private http: HttpClient) {}
 
-  getCompanies(payload: any): Observable<Company[]> {
-    return this.http.post<Company[]>(
+  getCompanies(payload: any): Observable<CompanyResponse> {
+    return this.http.post<CompanyResponse>(
       `${this.baseUrl}/exhibitor-company-list`,
       payload
     );
@@ -28,6 +28,20 @@ export class ExhibitorService {
       `${this.baseUrl}/add-exhibitor`,
       payload
     );
+  }
+
+  addMultipleExhibitor(
+    payloads: Exhibitor[]
+  ): Observable<
+    { response: AddExhibitorResponse | null; error: any | null }[]
+  > {
+    const requests = payloads.map((payload) =>
+      this.addExhibitor(payload).pipe(
+        map((response) => ({ response, error: null })),
+        catchError((error) => of({ response: null, error }))
+      )
+    );
+    return forkJoin(requests);
   }
 
   getCountries(): Observable<any> {
