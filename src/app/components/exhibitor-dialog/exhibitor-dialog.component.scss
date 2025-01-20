@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.modal-enter {
+  @apply opacity-0 scale-95;
+}
+
+.modal-enter-active {
+  @apply opacity-100 scale-100;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.spacing {
+  letter-spacing: 1rem;
+  padding-left: 1rem;
+}

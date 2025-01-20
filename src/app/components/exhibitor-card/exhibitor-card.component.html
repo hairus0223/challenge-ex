@@ -1,0 +1,138 @@
+@if (isVisible) {
+<form [formGroup]="formGroup" @fadeOut>
+  <div class="shadow-lg rounded-lg bg-white">
+    <div
+      class="flex flex-row justify-between items-center rounded-t-lg px-4 py-4 bg-red-100"
+    >
+      <div
+        class="w-full flex flex-row content-between justify-between items-center gap-4"
+      >
+        <h3 class="text-md font-medium">Exhibitor #{{ exhibitorIndex + 1 }}</h3>
+        <button
+          type="button"
+          class="text-red-600 font-normal underline"
+          (click)="remove()"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-4 p-4">
+      @if (errorMessage){
+      <p class="text-sm text-red-600 font-normal">
+        {{ errorMessage }}
+      </p>
+      }
+      <div class="flex flex-col gap-2">
+        <label class="block text-xs font-medium">Email Address</label>
+        <input
+          type="email"
+          placeholder="Enter email"
+          formControlName="S_email_address"
+          class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-xs focus:outline-none focus:ring-2"
+          [class.border-red-500]="
+            formGroup.get('S_email_address')?.invalid &&
+            (formGroup.get('S_email_address')?.touched ||
+              formGroup.get('S_email_address')?.dirty)
+          "
+        />
+        <p
+          class="text-xs text-red-600 mt-1"
+          *ngIf="getError('S_email_address')"
+        >
+          {{ getError("S_email_address") }}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="block text-xs font-medium">Name on Badge</label>
+        <input
+          type="text"
+          placeholder="Enter name"
+          formControlName="S_name_on_badge"
+          class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-xs focus:outline-none focus:ring-2"
+          [class.border-red-500]="
+            formGroup.get('S_name_on_badge')?.invalid &&
+            (formGroup.get('S_name_on_badge')?.touched ||
+              formGroup.get('S_name_on_badge')?.dirty)
+          "
+        />
+        <p
+          class="text-xs text-red-600 mt-1"
+          *ngIf="getError('S_name_on_badge')"
+        >
+          {{ getError("S_name_on_badge") }}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="block text-xs font-medium">Job Title</label>
+        <input
+          type="text"
+          placeholder="Enter job title"
+          formControlName="S_job_title"
+          class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-xs focus:outline-none focus:ring-2"
+          [class.border-red-500]="
+            formGroup.get('S_job_title')?.invalid &&
+            (formGroup.get('S_job_title')?.touched ||
+              formGroup.get('S_job_title')?.dirty)
+          "
+        />
+        <p class="text-xs text-red-600 mt-1" *ngIf="getError('S_job_title')">
+          {{ getError("S_job_title") }}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="block text-xs font-medium">Country</label>
+        <div class="relative w-full">
+          <select
+            id="S_country"
+            name="S_country"
+            formControlName="S_country"
+            (change)="onCountryChange($event)"
+            class="w-full rounded-md border bg-white py-2 pl-3 pr-10 text-sm focus:outline-none focus:ring-2"
+            [class.border-red-500]="
+              formGroup.get('S_country')?.invalid &&
+              (formGroup.get('S_country')?.touched ||
+                formGroup.get('S_country')?.dirty)
+            "
+          >
+            <option value="">Please select</option>
+            @for (country of countries; track country){
+            <option [value]="country">
+              {{ country }}
+            </option>
+            }
+          </select>
+        </div>
+        <p class="text-xs text-red-600 mt-1" *ngIf="getError('S_country')">
+          {{ getError("S_country") }}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="block text-xs font-medium">Company on Badge</label>
+        <input
+          type="text"
+          placeholder="Enter company name"
+          formControlName="S_company_on_badge"
+          class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-xs focus:outline-none focus:ring-2"
+          [class.border-red-500]="
+            formGroup.get('S_company_on_badge')?.invalid &&
+            (formGroup.get('S_company_on_badge')?.touched ||
+              formGroup.get('S_company_on_badge')?.dirty)
+          "
+        />
+        <p
+          class="text-xs text-red-600 mt-1"
+          *ngIf="getError('S_company_on_badge')"
+        >
+          {{ getError("S_company_on_badge") }}
+        </p>
+      </div>
+    </div>
+  </div>
+</form>
+}

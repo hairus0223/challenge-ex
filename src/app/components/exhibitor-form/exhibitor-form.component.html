@@ -1,0 +1,137 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="flex flex-col gap-2 py-8">
+    <div class="flex flex-col gap-4 px-4 sm:px-0 lg:px-0">
+      <h1 class="text-3xl font-medium text-red-600">
+        Onsite Exhibitors Registration
+      </h1>
+
+      <div
+        class="flex flex-col gap-4 form-card p-4 shadow-lg rounded-lg bg-white"
+      >
+        <!-- Event Selection -->
+        <div class="flex flex-col gap-2">
+          <label for="event-selection" class="block text-sm font-medium"
+            >Event Selection</label
+          >
+          <div class="flex flex-col gap-2 px-2">
+            @for (event of events; track event.label){
+            <app-input-radio
+              [label]="event.label"
+              [name]="'event'"
+              [value]="event.value"
+              (modelChange)="onEventChange($event)"
+            ></app-input-radio>
+            }
+          </div>
+        </div>
+
+        <!-- Company Selection -->
+        <div class="flex flex-col gap-1">
+          <label for="company" class="block text-sm font-medium">Company</label>
+          <p class="text-xs text-gray-400">
+            If you are unable to find your company name, please approach our
+            Exhibitor Team for assistance.
+          </p>
+          <div class="relative w-full">
+            <select
+              id="company"
+              name="company"
+              formControlName="company"
+              (change)="onCompanyChange($event)"
+              class="w-full rounded-md border bg-white py-2 pl-3 pr-10 text-sm focus:outline-none focus:ring-2"
+            >
+              <option value="">Please select</option>
+              @for (company of filteredCompanies; track company.S_company){
+              <option [value]="company.S_company">
+                {{ company.S_company }}
+              </option>
+              }
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    @if(selectedEvent && selectedCompany) {
+    <div class="flex flex-col gap-6 py-8">
+      <hr class="border-gray-300" />
+
+      @if (errorMessages.length > 0){
+      <div class="flex flex-col gap-6">
+        <div class="px-4 sm:px-0 lg:px-0">
+          <div class="rounded-lg bg-red-100 p-4">
+            <p class="text-red-600 font-medium">
+              {{ failedSubmissionCount }} out of
+              {{ totalSubmissions }} submissions have failed.
+            </p>
+            <p class="text-red-600 font-normal">
+              To view your badge collection code, you may edit or remove your
+              entries, and click Register.
+            </p>
+          </div>
+        </div>
+
+        <div class="px-4 sm:px-0 lg:px-0">
+          <p class="text-red-600 font-medium">Note:</p>
+          <p class="font-normal">
+            Do not refresh the page, as doing so may result in the loss of all
+            your records.
+          </p>
+        </div>
+      </div>
+      }
+
+      <div class="px-4 sm:px-0 lg:px-0">
+        <span>* All field are mandatory</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 lg:px-0">
+        @for(exhibitor of getExhibitorControls(); track exhibitor; let i =
+        $index){ @if (shouldShowExhibitorCard(i)) {
+        <app-exhibitor-card
+          [exhibitorIndex]="i"
+          [formGroup]="exhibitor"
+          [countries]="countries"
+          [errorMessage]="getErrorMessage(i)"
+          (removeExhibitor)="removeExhibitor(i)"
+        ></app-exhibitor-card
+        >} }
+      </div>
+
+      <div class="px-4 sm:px-0 lg:px-0">
+        <button
+          class="w-full text-red-600 font-medium"
+          type="button"
+          (click)="addExhibitor()"
+        >
+          + Add Exhibitor
+        </button>
+      </div>
+
+      @if(totalSubmissions > 0) {
+      <hr class="border-gray-300" />
+      <div class="px-4 sm:px-0 lg:px-0">
+        <button
+          class="w-full flex flex-row justify-center items-center gap-2 text-white font-medium p-2 rounded-lg"
+          [ngClass]="{
+            'bg-red-600 hover:bg-orange-600': !isLoadingSubmission,
+            'bg-gray-400 cursor-not-allowed': isLoadingSubmission
+          }"
+          [disabled]="isLoadingSubmission"
+          type="submit"
+        >
+          @if (isLoadingSubmission) {
+          <span
+            class="inline-block h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin"
+          ></span>
+          } Register
+        </button>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</form>
+<app-exhibitor-dialog
+  [isVisible]="isModalVisible"
+  (close)="handleCloseModal()"
+></app-exhibitor-dialog>

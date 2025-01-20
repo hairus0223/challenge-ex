@@ -1,0 +1,7 @@
+.form-card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  @apply bg-[#ffffff] rounded-xl;
+  .form-card-header {
+    @apply bg-red-600 w-full;
+  }
+}

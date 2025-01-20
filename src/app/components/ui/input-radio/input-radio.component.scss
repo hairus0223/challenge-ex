@@ -1,0 +1,37 @@
+.input-radio {
+  @apply flex justify-start items-center cursor-pointer;
+
+  // Input (hidden)
+  &-input {
+    @apply hidden;
+  }
+
+  // Circle (unchecked state)
+  &-circle {
+    @apply w-4 h-4 rounded-full bg-white border border-gray-400;
+    @apply relative inline-block transition-all duration-300 ease-in-out;
+    margin-right: 0.5rem;
+
+    &::after {
+      content: "";
+      @apply w-full h-full absolute rounded-full bg-red-600; // Inner red circle
+      transform: scale(0); // Initially hidden
+      transition: transform 0.3s ease-in-out; // Smooth scaling animation
+    }
+  }
+
+  // Checked state
+  &-input:checked + .input-radio-circle {
+    @apply border-red-600; // Change the border color to red
+  }
+
+  // Checked state
+  &-input:checked + .input-radio-circle::after {
+    transform: scale(1); // Expand red circle when checked
+  }
+
+  // Label
+  &-label {
+    @apply text-base font-normal; // Adjust font size and weight
+  }
+}

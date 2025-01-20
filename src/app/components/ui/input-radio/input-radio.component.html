@@ -1,0 +1,12 @@
+<label class="input-radio">
+  <input
+    type="radio"
+    [name]="name"
+    [value]="value"
+    [checked]="value === model"
+    (change)="onChange()"
+    class="input-radio-input"
+  />
+  <span class="input-radio-circle"></span>
+  <span class="input-radio-label">{{ label }}</span>
+</label>
