@@ -3,11 +3,21 @@ export interface Company {
   S_event: string;
 }
 
+export interface CompanyResponse {
+  message: Company[];
+  status: boolean;
+}
+
+export interface ErrorMessage {
+  message: string;
+  status: boolean;
+}
+
 export interface Exhibitor {
   S_added_via: string;
   S_company: string;
   S_email_address: string;
-  S_group_reg_id: string;
+  S_group_reg_id?: string;
   S_name_on_badge: string;
   S_job_title: string;
   S_country: string;
