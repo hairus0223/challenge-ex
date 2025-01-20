@@ -16,7 +16,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Company, ErrorMessage, Exhibitor } from '../../models/exhibitor.model';
+import { Company, Exhibitor } from '../../models/exhibitor.model';
 import { InputRadioComponent } from '../ui/input-radio/input-radio.component';
 import { ExhibitorDialogComponent } from '../exhibitor-dialog/exhibitor-dialog.component';
 import { ExhibitorService } from '../../services/exhibitor.service';
@@ -146,6 +146,20 @@ export class ExhibitorFormComponent implements OnInit {
   }
 
   handleCloseModal(): void {
+    // Reset the form and all submission-related states
+    this.form.reset({
+      event: '',
+      company: '',
+      exhibitors: [],
+    });
+    this.isSubmission = false;
+    this.isLoadingSubmission = false;
+    this.errorMessages = [];
+    this.selectedEvent = '';
+    this.selectedCompany = '';
+    this.filteredCompanies = [];
+
+    // Close the modal
     this.isModalVisible = false;
   }
 
